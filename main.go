@@ -66,7 +66,7 @@ func main() {
 		if errx != nil {
 			log.Fatal(errx)
 		}
-		_, _ := git.PlainClone(dir+"/backup/"+project.Name, false, &git.CloneOptions{
+		_, err := git.PlainClone(dir+"/backup/"+project.Name, false, &git.CloneOptions{
 			Auth: &http.BasicAuth{
 				Username: "abc123", // yes, this can be anything except an empty string
 				Password: token,
@@ -74,6 +74,9 @@ func main() {
 			URL:      project.HTTPURLToRepo,
 			Progress: os.Stdout,
 		})
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 
 }
