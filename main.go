@@ -75,7 +75,7 @@ func main() {
 			Progress: os.Stdout,
 		})
 		if err != nil {
-			log.Fatal(err)
+			log.Printf(err)
 		}
 	}
 
