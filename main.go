@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"fmt"
 
 	"github.com/xanzy/go-gitlab"
 	"gopkg.in/src-d/go-git.v4"
