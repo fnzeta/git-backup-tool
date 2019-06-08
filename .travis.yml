@@ -1,0 +1,22 @@
+language: go
+go:
+  - 1.11.x
+env:
+  - GO111MODULE=on
+dist: trusty
+sudo: true
+install: true
+branches:
+  only:
+  - master
+script:
+  - env GO111MODULE=on go build
+before_deploy:
+  - go run main.go
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUBTOKEN 
+  target-branch: backup
+  local_dir: backup
+  repo: fnzeta/repos
