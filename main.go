@@ -74,9 +74,6 @@ func main() {
 			URL:      project.HTTPURLToRepo,
 			Progress: os.Stdout,
 		})
-		if err != nil {
-			log.Printf(err)
-		}
 	}
 
 }
