@@ -18,10 +18,10 @@ func main() {
 		log.Fatalf("No github token found")
 	}
 
-	group := os.Getenv("GROUP")
-	if group == "" {
-		log.Fatalf("No group found")
-	}
+// 	group := os.Getenv("GROUP")
+// 	if group == "" {
+// 		log.Fatalf("No group found")
+// 	}
 
 	lab := gitlab.NewClient(nil, token)
 
@@ -50,34 +50,34 @@ func main() {
 			Progress: os.Stdout,
 		})
 		if err != nil {
-			log.Fatal(err)
-		}
-	}
-
-	listGroupProjectsOptions := &gitlab.ListGroupProjectsOptions{}
-	listGroupProjects, _, err := lab.Groups.ListGroupProjects(group, listGroupProjectsOptions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	for _, project := range listGroupProjects {
-
-		dir, errx := os.Getwd()
-
-		//check if you need to panic, fallback or report
-		if errx != nil {
-			log.Fatal(errx)
-		}
-		_, err := git.PlainClone(dir+"/backup/"+project.Name, false, &git.CloneOptions{
-			Auth: &http.BasicAuth{
-				Username: "abc123", // yes, this can be anything except an empty string
-				Password: token,
-			},
-			URL:      project.HTTPURLToRepo,
-			Progress: os.Stdout,
-		})
-		if err != nil {
 			fmt.Println(err)
 		}
 	}
+
+// 	listGroupProjectsOptions := &gitlab.ListGroupProjectsOptions{}
+// 	listGroupProjects, _, err := lab.Groups.ListGroupProjects(group, listGroupProjectsOptions)
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	for _, project := range listGroupProjects {
+
+// 		dir, errx := os.Getwd()
+
+// 		//check if you need to panic, fallback or report
+// 		if errx != nil {
+// 			log.Fatal(errx)
+// 		}
+// 		_, err := git.PlainClone(dir+"/backup/"+project.Name, false, &git.CloneOptions{
+// 			Auth: &http.BasicAuth{
+// 				Username: "abc123", // yes, this can be anything except an empty string
+// 				Password: token,
+// 			},
+// 			URL:      project.HTTPURLToRepo,
+// 			Progress: os.Stdout,
+// 		})
+// 		if err != nil {
+// 			fmt.Println(err)
+// 		}
+// 	}
 
 }
